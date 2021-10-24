@@ -65,20 +65,6 @@ function App() {
 
     <ImagePopup />
 
-    <template className="card__template">
-      <li className="card">
-        <button className="card__delete-button" type="button" aria-label="delete"></button>
-        <img className="card__image" src="https://cdn.vox-cdn.com/thumbor/9j-s_MPUfWM4bWdZfPqxBxGkvlw=/1400x1050/filters:format(jpeg)/cdn.vox-cdn.com/uploads/chorus_asset/file/22312759/rickroll_4k.jpg" alt="rickroll" />
-        <div className="card__panel">
-          <h2 className="card__title">title</h2>
-          <div className="card__like">
-            <button className="card__like-button" type="button" aria-label="Like"></button>
-            <p className="card__like-counter">0</p>
-          </div>
-        </div>
-      </li>
-    </template>
-
     </>
   );
 }

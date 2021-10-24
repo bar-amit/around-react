@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import api from '../utils/Api';
+import Card from './Card';
 import avatar from '../images/profile__image.jpg';
 
 /**
@@ -19,15 +20,22 @@ function Main(props) {
   const [ userDecription, setUserDescription ] = React.useState(undefined);
   const [ userAvatar, setUserAvatar ] = React.useState(undefined);
 
+  const [ cardList, setCardList ] = React.useState([]);
+
   useEffect(() => {
     api.getUserInfo()
     .then(data => {
       setUserName(data.name);
       setUserDescription(data.about);
-      setUserAvatar(data.avatar)
+      setUserAvatar(data.avatar);
     })
+    .then(() =>
+      api.getCards()
+      .then(data=>setCardList(data))
+      .catch(e=>console.log(e))
+    )
     .catch(e=>console.log(e));
-  });
+  },[]);
 
   return (
     <main className="main">
@@ -44,6 +52,7 @@ function Main(props) {
       </section>
       <section className="gallery">
         <ul className="gallery__container">
+          {cardList.map(card => (<Card data={card} key={card._id} />))}
         </ul>
       </section>
     </main>
