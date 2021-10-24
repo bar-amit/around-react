@@ -1,6 +1,6 @@
-function Card({data}) {
+function Card({data, onCardClick}) {
   return (
-    <li className="card">
+    <li className="card" onClick={() => onCardClick(data)}>
         {/* <button className="card__delete-button" type="button" aria-label="delete"></button> */}
         <img className="card__image" src={data.link} alt={data.name} />
         <div className="card__panel">

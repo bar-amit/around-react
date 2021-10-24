@@ -11,20 +11,24 @@ function App() {
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
 
+  const [selectedCard, setSelectedCard] = React.useState({});
+
   const onEditProfileClick = () => setIsEditProfilePopupOpen(true);
   const onAddPlaceClick = () => setIsAddPlacePopupOpen(true);
   const onEditAvatarClick = () => setIsEditAvatarPopupOpen(true);
+  const onCardClick = (card) => setSelectedCard(card);
 
   const closeAllPopups = () => {
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
     setIsEditAvatarPopupOpen(false);
+    setSelectedCard({});
   };
 
   return (
     <>
     <Header />
-    <Main onEditProfileClick={onEditProfileClick} onAddPlaceClick={onAddPlaceClick} onEditAvatarClick={onEditAvatarClick} />
+    <Main onEditProfileClick={onEditProfileClick} onAddPlaceClick={onAddPlaceClick} onEditAvatarClick={onEditAvatarClick} onCardClick={onCardClick} />
     <Footer />
 
     <PopupWithForm title="Edit profile" name="edit-profile" isOpen={isEditProfilePopupOpen} onClose={closeAllPopups}>
@@ -63,7 +67,7 @@ function App() {
       <button className="popup__button" type="button">Yes</button>
     </PopupWithForm>
 
-    <ImagePopup />
+    <ImagePopup card={selectedCard} onClose={closeAllPopups} />
 
     </>
   );

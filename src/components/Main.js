@@ -10,11 +10,12 @@ import avatar from '../images/profile__image.jpg';
  * @param {Function} props.onEditProfileClick
  * @param {Function} props.onAddPlaceClick
  * @param {Function} props.onEditAvatarClick
+ * @param {Function} props.onCardClick
  * @returns JSX component
  */
 
 function Main(props) {
-  const { onEditProfileClick, onAddPlaceClick, onEditAvatarClick } = props;
+  const { onEditProfileClick, onAddPlaceClick, onEditAvatarClick, onCardClick } = props;
 
   const [ userName, setUserName ] = React.useState(undefined);
   const [ userDecription, setUserDescription ] = React.useState(undefined);
@@ -52,7 +53,7 @@ function Main(props) {
       </section>
       <section className="gallery">
         <ul className="gallery__container">
-          {cardList.map(card => (<Card data={card} key={card._id} />))}
+          {cardList.map(card => (<Card data={card} onCardClick={onCardClick} key={card._id} />))}
         </ul>
       </section>
     </main>
