@@ -2,7 +2,7 @@
 
 In this project I'm porting my [Around the US project](https://github.com/bar-amit/web_project_4).
 
-The project is deployed to [Github-Pages](https://bar-amit.github.io/around-reacct).
+The project is deployed to [Github-Pages](https://bar-amit.github.io/around-react).
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
@@ -47,7 +47,7 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 
 ### Deployment
 
-The project is deployed to [Github-Pages](https://bar-amit.github.io/around-reacct).
+The project is deployed to [Github-Pages](https://bar-amit.github.io/around-react).
 
 **Deployment Script**
 
@@ -60,7 +60,7 @@ More information here: [https://facebook.github.io/create-react-app/docs/deploym
 - Ported components to react.
 - ported the `CSS` styles.
 - Restored layout.
-- Deployed to [Github-Pages](https://bar-amit.github.io/around-reacct).
+- Deployed to [Github-Pages](https://bar-amit.github.io/around-react).
 
 ### TODO
 
