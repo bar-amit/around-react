@@ -53,7 +53,7 @@ class Api {
   }
   /**
    * Fetching a list of cards from the server.
-   * @returns {Promise<Array<{_id: string, createdAt: string, likes: Array<string>, link: string, name: string, owner: {name: string, about: string, avatar: string, cohort: string, _id: string}}>} - A promise for an array of card data.
+   * @returns {Promise<Array<{_id: string, createdAt: string, likes: Array<string>, link: string, name: string, owner: {name: string, about: string, avatar: string, cohort: string, _id: string}}>>} - A promise for an array of card data.
    */
   getCards(){
     return fetch(`${this._host}/cards`,{headers: this._headers})

@@ -1,16 +1,10 @@
-/**
- * Popup JSX component with a form.
- *
- * @param {*} props - The props object.
- * @property {string} props.title - The title of the popup.
- * @property {string} props.name - The name to be used for the class name and 'name' attribute.
- * @property {Boolean} props.isOpen - Popup's visibility state.
- * @property {Function} props.onClose - Close popup.
- * @constructor
-*/
-
 import React from "react";
 
+/**
+ * Popup with form component.
+ * @param {{title: string, name: string, isOpen: boolean, onClose: Function}} props - Props object.
+ * @returns {JSX.Element} Popup With Form JSX component.
+ */
 function PopupWithForm(props) {
   const { title, name, isOpen, onClose } = props;
 

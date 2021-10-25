@@ -4,16 +4,10 @@ import Card from './Card';
 import avatar from '../images/profile__image.jpg';
 
 /**
- * Main JSX component.
- *
- * @param {*} props
- * @param {Function} props.onEditProfileClick
- * @param {Function} props.onAddPlaceClick
- * @param {Function} props.onEditAvatarClick
- * @param {Function} props.onCardClick
- * @returns JSX component
+ * Main section component.
+ * @param {{onEditProfileClick: Function, onAddPlaceClick: Function, onEditAvatarClick: Function, onCardClick: Function}} props - Props object.
+ * @returns {JSX.Element} Main JSX component.
  */
-
 function Main(props) {
   const { onEditProfileClick, onAddPlaceClick, onEditAvatarClick, onCardClick } = props;
 
