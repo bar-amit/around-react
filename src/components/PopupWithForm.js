@@ -18,7 +18,7 @@ function PopupWithForm(props) {
       <div className="popup__container">
         <button className="popup__close-button popup__close-button_shrink" type="button" aria-label="close" onClick={onClose} />
         <h2 className="popup__title">{title}</h2>
-        <form className={`form form_name_${name}`} name={name} noValidate>
+        <form className={`form form_name_${name}`} name={name} >
           {props.children}
           <button className="form__save-button form__save-button_disabled" type="submit">{buttonText}</button>
         </form>
