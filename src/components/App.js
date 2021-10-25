@@ -25,6 +25,17 @@ function App() {
     setSelectedCard({});
   };
 
+  React.useEffect(() => {
+    const handleEscapeClose = (e) => {
+      if(e.key==='Escape')
+        closeAllPopups();
+    }
+
+    document.addEventListener('keydown', handleEscapeClose);
+
+    return () => document.removeEventListener('keydown', handleEscapeClose);
+    }, []);
+
   return (
     <>
     <Header />
