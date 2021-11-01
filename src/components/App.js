@@ -7,7 +7,7 @@ import EditProfilePopup from './EditProfilePopup';
 import NewPlacePopup from "./NewPlacePopup";
 import ImagePopup from "./ImagePopup";
 
-import api from '../utils/MockApi.js';
+import api from '../utils/Api';
 
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
@@ -18,6 +18,7 @@ function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
+  const [confirmPopupState, setConfirmPopupState] = React.useState({isOpen: false, cardId: ''});
 
   const [selectedCard, setSelectedCard] = React.useState({});
 
@@ -38,6 +39,14 @@ function App() {
     .then(() => setIsAddPlacePopupOpen(false))
     .catch(e=>console.log(e));
   }
+
+  function onConfirmSubmit(){
+    return api.deleteCard(confirmPopupState.cardId)
+    .then(updateCards)
+    .then(() => setConfirmPopupState({isOpen: false, cardId: ''}))
+    .catch(e=>console.log(e));
+  }
+
   // card functions:
   const onCardClick = (card) => setSelectedCard(card);
   const onCardLike = (card) => {
@@ -49,9 +58,7 @@ function App() {
       .catch(e=>console.log(e));
   }
   const onCardDelete = (card) => {
-    return api.deleteCard(card._id)
-    .then(updateCards)
-    .catch(e=>console.log(e));
+    setConfirmPopupState({isOpen: true, cardId: card._id});
   }
 
 
@@ -109,8 +116,7 @@ function App() {
         </label>
       </PopupWithForm>
 
-      <PopupWithForm title="Are you sure?" name="confirm" buttonText='Yes' onClose={closeAllPopups}>
-      </PopupWithForm>
+      <PopupWithForm title="Are you sure?" name="confirm" buttonText='Yes' isOpen={confirmPopupState.isOpen} onClose={closeAllPopups} onSubmit={onConfirmSubmit} />
 
       <ImagePopup card={selectedCard} onClose={closeAllPopups} />
     </CurrentUserContext.Provider>
