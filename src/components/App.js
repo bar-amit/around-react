@@ -4,9 +4,10 @@ import Main from "./Main";
 import Footer from "./Footer";
 import PopupWithForm from "./PopupWithForm";
 import EditProfilePopup from './EditProfilePopup';
+import NewPlacePopup from "./NewPlacePopup";
 import ImagePopup from "./ImagePopup";
 
-import api from '../utils/MockApi';
+import api from '../utils/MockApi.js';
 
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
@@ -31,6 +32,12 @@ function App() {
     .catch(e=>console.log(e));
   }
 
+  function onPlaceSubmit({name, link}){
+    return api.addCard({name, link})
+    .then(updateCards)
+    .then(() => setIsAddPlacePopupOpen(false))
+    .catch(e=>console.log(e));
+  }
   // card functions:
   const onCardClick = (card) => setSelectedCard(card);
   const onCardLike = (card) => {
@@ -93,16 +100,7 @@ function App() {
 
       <EditProfilePopup title="Edit profile" name="edit-profile" buttonText='Save' isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onSubmit={onProfileSubmit} />
 
-      <PopupWithForm title="New Place" name="new-place" buttonText='Create' isOpen={isAddPlacePopupOpen} onClose={closeAllPopups}>
-        <label className="form__field">
-          <input id="input_title" className="form__input form__input_type_title" type="text" name="title" placeholder="Title" minLength="1" maxLength="30" required />
-          <span id="input_title-error" className="form__input-error"></span>
-        </label>
-        <label className="form__field">
-          <input id="input_link" className="form__input form__input_type_link" type="url" name="link" placeholder="Image link" required />
-          <span id="input_link-error" className="form__input-error"></span>
-        </label>
-      </PopupWithForm>
+      <NewPlacePopup title="New Place" name="new-place" buttonText='Create' isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} onSubmit={onPlaceSubmit} />
 
       <PopupWithForm title="Change profile picture" name="edit-avatar" buttonText='Save' isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups}>
         <label className="form__field">
