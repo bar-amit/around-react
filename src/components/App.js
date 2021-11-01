@@ -5,7 +5,7 @@ import Footer from "./Footer";
 import PopupWithForm from "./PopupWithForm";
 import ImagePopup from "./ImagePopup";
 
-import api from '../utils/MockApi';
+import api from '../utils/Api';
 
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
@@ -22,7 +22,23 @@ function App() {
   const onEditProfileClick = () => setIsEditProfilePopupOpen(true);
   const onAddPlaceClick = () => setIsAddPlacePopupOpen(true);
   const onEditAvatarClick = () => setIsEditAvatarPopupOpen(true);
+
+  // card functions:
   const onCardClick = (card) => setSelectedCard(card);
+  const onCardLike = (card) => {
+      if(card.likes.some(like=>like._id===currentUser._id)) return api.removeLike(card._id)
+      .then(updateCards)
+      .catch(e=>console.log(e));
+      return api.addLike(card._id)
+      .then(updateCards)
+      .catch(e=>console.log(e));
+  }
+  const onCardDelete = (card) => {
+    return api.deleteCard(card._id)
+    .then(updateCards)
+    .catch(e=>console.log(e));
+  }
+
 
   const closeAllPopups = () => {
     setIsEditProfilePopupOpen(false);
@@ -31,14 +47,16 @@ function App() {
     setSelectedCard({});
   };
 
+  function updateCards(){
+    return api.getCards()
+    .then(data=> setCards(data))
+    .catch(e=>console.log(e));
+  }
+
   React.useEffect(() => {
     api.getUserInfo()
     .then(data => setCurrentUser(data))
-    .then(() =>
-      api.getCards()
-      .then(data=> setCards(data))
-      .catch(e=>console.log(e))
-    )
+    .then(updateCards)
     .catch(e=>console.log(e));
   },[]);
 
@@ -58,7 +76,7 @@ function App() {
     <Header />
 
     <CurrentUserContext.Provider value={currentUser}>
-      <Main onEditProfileClick={onEditProfileClick} onAddPlaceClick={onAddPlaceClick} onEditAvatarClick={onEditAvatarClick} onCardClick={onCardClick} cardsList={cards} />
+      <Main onEditProfileClick={onEditProfileClick} onAddPlaceClick={onAddPlaceClick} onEditAvatarClick={onEditAvatarClick} onCardClick={onCardClick} onCardLike={onCardLike} onCardDelete={onCardDelete} cardsList={cards} />
 
       <PopupWithForm title="Edit profile" name="edit-profile" buttonText='Save' isOpen={isEditProfilePopupOpen} onClose={closeAllPopups}>
         <label className="form__field">

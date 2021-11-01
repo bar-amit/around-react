@@ -18,10 +18,10 @@ import avatarImage from '../images/profile__image.jpg';
 
 /**
  * Main section component.
- * @param {{onEditProfileClick: Function, onAddPlaceClick: Function, onEditAvatarClick: Function, onCardClick: Function, cardsList: Array<cardData>}} props - Props object.
+ * @param {{onEditProfileClick: Function, onAddPlaceClick: Function, onEditAvatarClick: Function, onCardClick: Function, onCardLike: Function, onCardDelete: Function cardsList: Array<cardData>}} props - Props object.
  * @returns {JSX.Element} Main JSX component.
  */
-function Main({ onEditProfileClick, onAddPlaceClick, onEditAvatarClick, onCardClick, cardsList }) {
+function Main({ onEditProfileClick, onAddPlaceClick, onEditAvatarClick, onCardClick, onCardLike, onCardDelete, cardsList }) {
   const {name, avatar, about} = React.useContext(CurrentUserContext);
 
   return (
@@ -39,7 +39,7 @@ function Main({ onEditProfileClick, onAddPlaceClick, onEditAvatarClick, onCardCl
       </section>
       <section className="gallery">
         <ul className="gallery__container">
-          {cardsList.map(card => (<Card data={card} onCardClick={onCardClick} key={card._id} />))}
+          {cardsList.map(card => (<Card data={card} onCardClick={onCardClick} onCardLike={onCardLike} onCardDelete={onCardDelete} key={card._id} />))}
         </ul>
       </section>
     </main>
