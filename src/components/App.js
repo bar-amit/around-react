@@ -13,9 +13,13 @@ import api from '../utils/Api';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 function App() {
+
   const [currentUser, setCurrentUser] = React.useState({name: '', about: ''});
   const [cards, setCards] = React.useState([]);
 
+  /*
+    Popups state
+  */
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
@@ -23,31 +27,71 @@ function App() {
 
   const [selectedCard, setSelectedCard] = React.useState({});
 
+  const closeAllPopups = () => {
+    setIsEditProfilePopupOpen(false);
+    setIsAddPlacePopupOpen(false);
+    setIsEditAvatarPopupOpen(false);
+    setSelectedCard({});
+  };
+
+  React.useEffect(() => {
+    const handleEscapeClose = (e) => {
+      if(e.key==='Escape')
+        closeAllPopups();
+    }
+
+    document.addEventListener('keydown', handleEscapeClose);
+
+    return () => document.removeEventListener('keydown', handleEscapeClose);
+    }, []);
+
+  /*
+    Page's buttons click handlers
+  */
   const onEditProfileClick = () => setIsEditProfilePopupOpen(true);
   const onAddPlaceClick = () => setIsAddPlacePopupOpen(true);
   const onEditAvatarClick = () => setIsEditAvatarPopupOpen(true);
 
+  /*
+    Form data functions
+  */
+ /**
+  * Update profile info
+  * @param {{name: string, about: string}} param0
+  * @returns Promise
+  */
   function onProfileSubmit({name,about}){
     return api.updateUser({name,about})
     .then(updateUserInfo)
     .then(() => setIsEditProfilePopupOpen(false))
     .catch(e=>console.log(e));
   }
-
+/**
+ * Add a new card
+ * @param {{name: string, link: string}} param0
+ * @returns Promise
+ */
   function onPlaceSubmit({name, link}){
     return api.addCard({name, link})
     .then(updateCards)
     .then(() => setIsAddPlacePopupOpen(false))
     .catch(e=>console.log(e));
   }
-
+/**
+ * Set a new avatar
+ * @param {string} link
+ * @returns Promise
+ */
   function onAvatarSubmit(link){
     return api.updateUserAvatar(link)
     .then(updateUserInfo)
     .then(() => setIsEditAvatarPopupOpen(false))
     .catch(e=>console.log(e));
   }
-
+/**
+ * Confirmation dialog to delete a card
+ * @returns Promise
+ */
   function onConfirmSubmit(){
     return api.deleteCard(confirmPopupState.cardId)
     .then(updateCards)
@@ -55,7 +99,9 @@ function App() {
     .catch(e=>console.log(e));
   }
 
-  // card functions:
+  /*
+    Card functions
+  */
   const onCardClick = (card) => setSelectedCard(card);
   const onCardLike = (card) => {
       if(card.likes.some(like=>like._id===currentUser._id)) return api.removeLike(card._id)
@@ -69,14 +115,9 @@ function App() {
     setConfirmPopupState({isOpen: true, cardId: card._id});
   }
 
-
-  const closeAllPopups = () => {
-    setIsEditProfilePopupOpen(false);
-    setIsAddPlacePopupOpen(false);
-    setIsEditAvatarPopupOpen(false);
-    setSelectedCard({});
-  };
-
+  /*
+    Api calls
+  */
   function updateCards(){
     return api.getCards()
     .then(data=> setCards(data))
@@ -94,17 +135,6 @@ function App() {
     .then(updateCards)
     .catch(e=>console.log(e));
   },[]);
-
-  React.useEffect(() => {
-    const handleEscapeClose = (e) => {
-      if(e.key==='Escape')
-        closeAllPopups();
-    }
-
-    document.addEventListener('keydown', handleEscapeClose);
-
-    return () => document.removeEventListener('keydown', handleEscapeClose);
-    }, []);
 
   return (
     <>
