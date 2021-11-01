@@ -26,3 +26,4 @@ yarn-error.log*
 /old.src
 .editorconfig
 /TODO.txt
+src/utils/MockApi.js
