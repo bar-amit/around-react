@@ -1,6 +1,21 @@
 import { useState, useEffect } from "react";
 import PopupWithForm from "./PopupWithForm";
 
+/**
+ * @typedef {Object} AddPlaceProps
+ * @property {string} title - Form title
+ * @property {string} name - Form name
+ * @property {string} buttonText - Button text
+ * @property {boolean} isOpen - Is the popup open
+ * @property {Function} onClose - Function to close the popup
+ * @property {Function} onSubmit - Function to handle the form data
+ */
+
+/**
+ *
+ * @param {AddPlaceProps} props - JSX props
+ * @returns
+ */
 function AddPlacePopup({ title, name: formName, buttonText, isOpen, onClose, onSubmit }) {
 
   const [name, setName] = useState('');

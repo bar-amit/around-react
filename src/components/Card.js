@@ -2,16 +2,33 @@ import { useContext } from 'react';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 /**
- * Card JSX component
- * @param {{data: cardData, onCardClick: Function, onCardLike: Function, onCardDelete: Function}} param0 - props object
+ * userData type defenition:
+ * @typedef {Object} userData
+ * @property {string} name - Username.
+ * @property {string} about - User description.
+ * @property {string} avatar - Link for user's avatar.
+ * @property {string} cohort - User's cohort.
+ * @property {string} _id - User ID.
+ *
  * cardData type defenition:
  * @typedef {Object} cardData
  * @property {string} _id - Card ID.
  * @property {string} createdAt - Time of creation.
- * @property {Array<string>} likes - An array of IDs of users whom liked the card.
+ * @property {Array<userData>} likes - An array of IDs of users whom liked the card.
  * @property {string} link - Link to card image.
  * @property {string} name - Card title.
  * @property {userData} owner - User data of card's owner.
+ *
+ * Card Props type defenition:
+ * @typedef {Object} CardProps - props for Card
+ * @property {cardData} data - Card data
+ * @property {Function} onCardClick - Opens image popup on click.
+ * @property {Function} onCardLike - Handles like button click.
+ * @property {Function} onCardDelete - Handles card delete
+ */
+/**
+ * Card JSX component
+ * @param {CardProps} props - props object
  */
 
 function Card({data, onCardClick, onCardLike, onCardDelete}) {

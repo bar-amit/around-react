@@ -14,7 +14,7 @@
  * @typedef {Object} cardData
  * @property {string} _id - Card ID.
  * @property {string} createdAt - Time of creation.
- * @property {Array<string>} likes - An array of IDs of users whom liked the card.
+ * @property {Array<userData>} likes - An array of IDs of users whom liked the card.
  * @property {string} link - Link to card image.
  * @property {string} name - Card title.
  * @property {userData} owner - User data of card's owner.
