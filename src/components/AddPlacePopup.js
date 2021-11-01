@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import PopupWithForm from "./PopupWithForm";
 
-function NewPlacePopup({ title, name: formName, buttonText, isOpen, onClose, onSubmit }) {
+function AddPlacePopup({ title, name: formName, buttonText, isOpen, onClose, onSubmit }) {
 
   const [name, setName] = useState('');
   const [link, setLink] = useState('');
@@ -36,4 +36,4 @@ function NewPlacePopup({ title, name: formName, buttonText, isOpen, onClose, onS
   );
 }
 
-export default NewPlacePopup;
+export default AddPlacePopup;
