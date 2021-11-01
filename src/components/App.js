@@ -3,14 +3,15 @@ import Header from "./Header";
 import Main from "./Main";
 import Footer from "./Footer";
 import PopupWithForm from "./PopupWithForm";
+import EditProfilePopup from './EditProfilePopup';
 import ImagePopup from "./ImagePopup";
 
-import api from '../utils/Api';
+import api from '../utils/MockApi';
 
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 function App() {
-  const [currentUser, setCurrentUser] = React.useState({});
+  const [currentUser, setCurrentUser] = React.useState({name: '', about: ''});
   const [cards, setCards] = React.useState([]);
 
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
@@ -22,6 +23,13 @@ function App() {
   const onEditProfileClick = () => setIsEditProfilePopupOpen(true);
   const onAddPlaceClick = () => setIsAddPlacePopupOpen(true);
   const onEditAvatarClick = () => setIsEditAvatarPopupOpen(true);
+
+  function onProfileSubmit({name,about}){
+    return api.updateUser({name,about})
+    .then(updateUserInfo)
+    .then(() => setIsEditProfilePopupOpen(false))
+    .catch(e=>console.log(e));
+  }
 
   // card functions:
   const onCardClick = (card) => setSelectedCard(card);
@@ -53,9 +61,14 @@ function App() {
     .catch(e=>console.log(e));
   }
 
-  React.useEffect(() => {
-    api.getUserInfo()
+  function updateUserInfo(){
+    return api.getUserInfo()
     .then(data => setCurrentUser(data))
+    .catch(e=>console.log(e));
+  }
+
+  React.useEffect(() => {
+    updateUserInfo()
     .then(updateCards)
     .catch(e=>console.log(e));
   },[]);
@@ -78,16 +91,7 @@ function App() {
     <CurrentUserContext.Provider value={currentUser}>
       <Main onEditProfileClick={onEditProfileClick} onAddPlaceClick={onAddPlaceClick} onEditAvatarClick={onEditAvatarClick} onCardClick={onCardClick} onCardLike={onCardLike} onCardDelete={onCardDelete} cardsList={cards} />
 
-      <PopupWithForm title="Edit profile" name="edit-profile" buttonText='Save' isOpen={isEditProfilePopupOpen} onClose={closeAllPopups}>
-        <label className="form__field">
-          <input id="input_name" className="form__input form__input_type_name" type="text" name="name" placeholder="Name" minLength="2" maxLength="40" required />
-          <span id="input_name-error" className="form__input-error"></span>
-        </label>
-        <label className="form__field">
-          <input id="input_bio" className="form__input form__input_type_bio" type="text" name="bio" placeholder="About me" minLength="2" maxLength="200" required />
-          <span id="input_bio-error" className="form__input-error"></span>
-        </label>
-      </PopupWithForm>
+      <EditProfilePopup title="Edit profile" name="edit-profile" buttonText='Save' isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onSubmit={onProfileSubmit} />
 
       <PopupWithForm title="New Place" name="new-place" buttonText='Create' isOpen={isAddPlacePopupOpen} onClose={closeAllPopups}>
         <label className="form__field">
