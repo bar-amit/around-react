@@ -57,13 +57,14 @@ More information here: [https://facebook.github.io/create-react-app/docs/deploym
 
 ### Last Update
 
-- Ported components to react.
-- ported the `CSS` styles.
-- Restored layout.
-- Deployed to [Github-Pages](https://bar-amit.github.io/around-react).
+- All the old features are back!!!
+- Form submition
+- Give likes
+- Add/Delete card
+- Edit profile
 
 ### TODO
 
-- Restore form functionality.
+- Form validation
 - Backend.
 - Login.
