@@ -4,6 +4,7 @@ import Main from "./Main";
 import Footer from "./Footer";
 import PopupWithForm from "./PopupWithForm";
 import EditProfilePopup from './EditProfilePopup';
+import EditAvatarPopup from "./EditAvatarPopup";
 import NewPlacePopup from "./NewPlacePopup";
 import ImagePopup from "./ImagePopup";
 
@@ -37,6 +38,13 @@ function App() {
     return api.addCard({name, link})
     .then(updateCards)
     .then(() => setIsAddPlacePopupOpen(false))
+    .catch(e=>console.log(e));
+  }
+
+  function onAvatarSubmit(link){
+    return api.updateUserAvatar(link)
+    .then(updateUserInfo)
+    .then(() => setIsEditAvatarPopupOpen(false))
     .catch(e=>console.log(e));
   }
 
@@ -109,12 +117,7 @@ function App() {
 
       <NewPlacePopup title="New Place" name="new-place" buttonText='Create' isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} onSubmit={onPlaceSubmit} />
 
-      <PopupWithForm title="Change profile picture" name="edit-avatar" buttonText='Save' isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups}>
-        <label className="form__field">
-          <input id="input_url" className="form__input form__input_type_url" type="url" name="url" placeholder="Image URL" required />
-          <span id="input_url-error" className="form__input-error"></span>
-        </label>
-      </PopupWithForm>
+      <EditAvatarPopup title="Change profile picture" name="edit-avatar" buttonText='Save' isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onSubmit={onAvatarSubmit} />
 
       <PopupWithForm title="Are you sure?" name="confirm" buttonText='Yes' isOpen={confirmPopupState.isOpen} onClose={closeAllPopups} onSubmit={onConfirmSubmit} />
 
