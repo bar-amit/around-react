@@ -16,8 +16,14 @@ import PopupWithForm from "./PopupWithForm";
  * @param {EditAvatarProps} props - JSX props.
  * @returns
  */
-function EditAvatarPopup({ title, name: formName, buttonText, isOpen, onClose, onSubmit }) {
-
+function EditAvatarPopup({
+  title,
+  name: formName,
+  buttonText,
+  isOpen,
+  onClose,
+  onSubmit,
+}) {
   const inputRef = useRef();
 
   function handleEditAvatarSubmit() {
@@ -25,9 +31,24 @@ function EditAvatarPopup({ title, name: formName, buttonText, isOpen, onClose, o
   }
 
   return (
-    <PopupWithForm title={title} name={formName} buttonText={buttonText} isOpen={isOpen} onClose={onClose} onSubmit={handleEditAvatarSubmit} >
+    <PopupWithForm
+      title={title}
+      name={formName}
+      buttonText={buttonText}
+      isOpen={isOpen}
+      onClose={onClose}
+      onSubmit={handleEditAvatarSubmit}
+    >
       <label className="form__field">
-        <input id="input_url" className="form__input form__input_type_url" ref={inputRef} type="url" name="url" placeholder="Image URL" required />
+        <input
+          id="input_url"
+          className="form__input form__input_type_url"
+          ref={inputRef}
+          type="url"
+          name="url"
+          placeholder="Image URL"
+          required
+        />
         <span id="input_url-error" className="form__input-error"></span>
       </label>
     </PopupWithForm>
