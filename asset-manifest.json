@@ -1,25 +1,25 @@
 {
   "files": {
     "main.css": "/around-react/static/css/main.ac4f22e9.chunk.css",
-    "main.js": "/around-react/static/js/main.d3634ded.chunk.js",
-    "main.js.map": "/around-react/static/js/main.d3634ded.chunk.js.map",
-    "runtime-main.js": "/around-react/static/js/runtime-main.5631c76f.js",
-    "runtime-main.js.map": "/around-react/static/js/runtime-main.5631c76f.js.map",
-    "static/js/2.e196e017.chunk.js": "/around-react/static/js/2.e196e017.chunk.js",
-    "static/js/2.e196e017.chunk.js.map": "/around-react/static/js/2.e196e017.chunk.js.map",
-    "static/js/3.375378dc.chunk.js": "/around-react/static/js/3.375378dc.chunk.js",
-    "static/js/3.375378dc.chunk.js.map": "/around-react/static/js/3.375378dc.chunk.js.map",
+    "main.js": "/around-react/static/js/main.29ad59e6.chunk.js",
+    "main.js.map": "/around-react/static/js/main.29ad59e6.chunk.js.map",
+    "runtime-main.js": "/around-react/static/js/runtime-main.9d2ef29f.js",
+    "runtime-main.js.map": "/around-react/static/js/runtime-main.9d2ef29f.js.map",
+    "static/js/2.d2cc1133.chunk.js": "/around-react/static/js/2.d2cc1133.chunk.js",
+    "static/js/2.d2cc1133.chunk.js.map": "/around-react/static/js/2.d2cc1133.chunk.js.map",
+    "static/js/3.e310d81e.chunk.js": "/around-react/static/js/3.e310d81e.chunk.js",
+    "static/js/3.e310d81e.chunk.js.map": "/around-react/static/js/3.e310d81e.chunk.js.map",
     "index.html": "/around-react/index.html",
     "static/css/main.ac4f22e9.chunk.css.map": "/around-react/static/css/main.ac4f22e9.chunk.css.map",
-    "static/js/2.e196e017.chunk.js.LICENSE.txt": "/around-react/static/js/2.e196e017.chunk.js.LICENSE.txt",
+    "static/js/2.d2cc1133.chunk.js.LICENSE.txt": "/around-react/static/js/2.d2cc1133.chunk.js.LICENSE.txt",
     "static/media/index.css": "/around-react/static/media/profile__edit-button_small.ff0fcb31.svg",
     "static/media/header__logo_large.4e8e0a1d.svg": "/around-react/static/media/header__logo_large.4e8e0a1d.svg",
     "static/media/profile__image.453c0ae5.jpg": "/around-react/static/media/profile__image.453c0ae5.jpg"
   },
   "entrypoints": [
-    "static/js/runtime-main.5631c76f.js",
-    "static/js/2.e196e017.chunk.js",
+    "static/js/runtime-main.9d2ef29f.js",
+    "static/js/2.d2cc1133.chunk.js",
     "static/css/main.ac4f22e9.chunk.css",
-    "static/js/main.d3634ded.chunk.js"
+    "static/js/main.29ad59e6.chunk.js"
   ]
 }
