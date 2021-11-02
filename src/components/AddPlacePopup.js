@@ -28,7 +28,7 @@ function AddPlacePopup({ title, name: formName, buttonText, isOpen, onClose, onS
       setLink(e.target.value);
   }
 
-  function newPlaceSubmit() {
+  function handleNewPlaceSubmit() {
     return onSubmit({name, link});
   }
 
@@ -38,7 +38,7 @@ function AddPlacePopup({ title, name: formName, buttonText, isOpen, onClose, onS
   }, [isOpen]);
 
   return (
-    <PopupWithForm title={title} name={formName} buttonText={buttonText} isOpen={isOpen} onClose={onClose} onSubmit={newPlaceSubmit} >
+    <PopupWithForm title={title} name={formName} buttonText={buttonText} isOpen={isOpen} onClose={onClose} onSubmit={handleNewPlaceSubmit} >
         <label className="form__field">
           <input id="input_title" className="form__input form__input_type_title" value={name} type="text" name="title" placeholder="Title" minLength="1" maxLength="30" required onChange={handleChange} />
           <span id="input_title-error" className="form__input-error"></span>

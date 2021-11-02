@@ -48,9 +48,9 @@ function App() {
   /*
     Page's buttons click handlers
   */
-  const onEditProfileClick = () => setIsEditProfilePopupOpen(true);
-  const onAddPlaceClick = () => setIsAddPlacePopupOpen(true);
-  const onEditAvatarClick = () => setIsEditAvatarPopupOpen(true);
+  const handleEditProfileClick = () => setIsEditProfilePopupOpen(true);
+  const handleAddPlaceClick = () => setIsAddPlacePopupOpen(true);
+  const handleEditAvatarClick = () => setIsEditAvatarPopupOpen(true);
 
   /*
     Form data functions
@@ -60,7 +60,7 @@ function App() {
   * @param {{name: string, about: string}} param0
   * @returns Promise
   */
-  function onProfileSubmit({name,about}) {
+  function handlProfileSubmit({name,about}) {
     return api.updateUser({name,about})
     .then(updateUserInfo)
     .then(() => setIsEditProfilePopupOpen(false))
@@ -71,7 +71,7 @@ function App() {
  * @param {{name: string, link: string}} param0
  * @returns Promise
  */
-  function onPlaceSubmit({name, link}) {
+  function handlePlaceSubmit({name, link}) {
     return api.addCard({name, link})
     .then(updateCards)
     .then(() => setIsAddPlacePopupOpen(false))
@@ -82,7 +82,7 @@ function App() {
  * @param {string} link
  * @returns Promise
  */
-  function onAvatarSubmit(link) {
+  function handleAvatarSubmit(link) {
     return api.updateUserAvatar(link)
     .then(updateUserInfo)
     .then(() => setIsEditAvatarPopupOpen(false))
@@ -92,7 +92,7 @@ function App() {
  * Confirmation dialog to delete a card
  * @returns Promise
  */
-  function onConfirmSubmit() {
+  function handleConfirmSubmit() {
     return api.deleteCard(confirmPopupState.cardId)
     .then(updateCards)
     .then(() => setConfirmPopupState({isOpen: false, cardId: ''}))
@@ -102,8 +102,8 @@ function App() {
   /*
     Card functions
   */
-  const onCardClick = (card) => setSelectedCard(card);
-  const onCardLike = (card) => {
+  const handleCardClick = (card) => setSelectedCard(card);
+  const handleCardLike = (card) => {
       if(card.likes.some((like) => like._id === currentUser._id)) return api.removeLike(card._id)
       .then(updateCards)
       .catch((e) => console.log(e));
@@ -111,7 +111,7 @@ function App() {
       .then(updateCards)
       .catch((e) => console.log(e));
   }
-  const onCardDelete = (card) => {
+  const handleCardDelete = (card) => {
     setConfirmPopupState({isOpen: true, cardId: card._id});
   }
 
@@ -141,15 +141,15 @@ function App() {
     <Header />
 
     <CurrentUserContext.Provider value={currentUser}>
-      <Main onEditProfileClick={onEditProfileClick} onAddPlaceClick={onAddPlaceClick} onEditAvatarClick={onEditAvatarClick} onCardClick={onCardClick} onCardLike={onCardLike} onCardDelete={onCardDelete} cardsList={cards} />
+      <Main onEditProfileClick={handleEditProfileClick} onAddPlaceClick={handleAddPlaceClick} onEditAvatarClick={handleEditAvatarClick} onCardClick={handleCardClick} onCardLike={handleCardLike} onCardDelete={handleCardDelete} cardsList={cards} />
 
-      <EditProfilePopup title="Edit profile" name="edit-profile" buttonText='Save' isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onSubmit={onProfileSubmit} />
+      <EditProfilePopup title="Edit profile" name="edit-profile" buttonText='Save' isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onSubmit={handlProfileSubmit} />
 
-      <AddPlacePopup title="New Place" name="new-place" buttonText='Create' isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} onSubmit={onPlaceSubmit} />
+      <AddPlacePopup title="New Place" name="new-place" buttonText='Create' isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} onSubmit={handlePlaceSubmit} />
 
-      <EditAvatarPopup title="Change profile picture" name="edit-avatar" buttonText='Save' isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onSubmit={onAvatarSubmit} />
+      <EditAvatarPopup title="Change profile picture" name="edit-avatar" buttonText='Save' isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onSubmit={handleAvatarSubmit} />
 
-      <PopupWithForm title="Are you sure?" name="confirm" buttonText='Yes' isOpen={confirmPopupState.isOpen} onClose={closeAllPopups} onSubmit={onConfirmSubmit} />
+      <PopupWithForm title="Are you sure?" name="confirm" buttonText='Yes' isOpen={confirmPopupState.isOpen} onClose={closeAllPopups} onSubmit={handleConfirmSubmit} />
 
       <ImagePopup card={selectedCard} onClose={closeAllPopups} />
     </CurrentUserContext.Provider>

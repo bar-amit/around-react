@@ -20,12 +20,12 @@ function EditAvatarPopup({ title, name: formName, buttonText, isOpen, onClose, o
 
   const inputRef = useRef();
 
-  function editAvatarSubmit() {
+  function handleEditAvatarSubmit() {
     return onSubmit(inputRef.current.value);
   }
 
   return (
-    <PopupWithForm title={title} name={formName} buttonText={buttonText} isOpen={isOpen} onClose={onClose} onSubmit={editAvatarSubmit} >
+    <PopupWithForm title={title} name={formName} buttonText={buttonText} isOpen={isOpen} onClose={onClose} onSubmit={handleEditAvatarSubmit} >
       <label className="form__field">
         <input id="input_url" className="form__input form__input_type_url" ref={inputRef} type="url" name="url" placeholder="Image URL" required />
         <span id="input_url-error" className="form__input-error"></span>

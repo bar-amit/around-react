@@ -36,6 +36,7 @@ function Card({data, onCardClick, onCardLike, onCardDelete}) {
 
   const isOwn = id === data.owner._id;
   const isLiked = data.likes.some((like) => like._id === id);
+  
   return (
     <li className="card">
       {isOwn ? <button className="card__delete-button" type="button" aria-label="delete" onClick={()=>onCardDelete(data)}></button> : ''}
