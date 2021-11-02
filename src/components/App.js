@@ -14,7 +14,7 @@ import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 function App() {
 
-  const [currentUser, setCurrentUser] = React.useState({name: '', about: ''});
+  const [currentUser, setCurrentUser] = React.useState({name: '', about: '', _id: ''});
   const [cards, setCards] = React.useState([]);
 
   /*
@@ -62,7 +62,7 @@ function App() {
   */
   function handlProfileSubmit({name,about}) {
     return api.updateUser({name,about})
-    .then(updateUserInfo)
+    .then(setCurrentUser)
     .then(() => setIsEditProfilePopupOpen(false))
     .catch((e) => console.log(e));
   }
@@ -73,7 +73,7 @@ function App() {
  */
   function handlePlaceSubmit({name, link}) {
     return api.addCard({name, link})
-    .then(updateCards)
+    .then(card => setCards([ card, ...cards]))
     .then(() => setIsAddPlacePopupOpen(false))
     .catch((e) => console.log(e));
   }
@@ -84,7 +84,7 @@ function App() {
  */
   function handleAvatarSubmit(link) {
     return api.updateUserAvatar(link)
-    .then(updateUserInfo)
+    .then(({avatar}) => setCurrentUser({...currentUser, avatar}))
     .then(() => setIsEditAvatarPopupOpen(false))
     .catch((e) => console.log(e));
   }
@@ -93,8 +93,9 @@ function App() {
  * @returns Promise
  */
   function handleConfirmSubmit() {
-    return api.deleteCard(confirmPopupState.cardId)
-    .then(updateCards)
+    const id = confirmPopupState.cardId;
+    return api.deleteCard(id)
+    .then(setCards(cards.filter(card => card._id !== id)))
     .then(() => setConfirmPopupState({isOpen: false, cardId: ''}))
     .catch((e) => console.log(e));
   }
@@ -104,12 +105,11 @@ function App() {
   */
   const handleCardClick = (card) => setSelectedCard(card);
   const handleCardLike = (card) => {
-      if(card.likes.some((like) => like._id === currentUser._id)) return api.removeLike(card._id)
-      .then(updateCards)
-      .catch((e) => console.log(e));
-      return api.addLike(card._id)
-      .then(updateCards)
-      .catch((e) => console.log(e));
+      const hasLike = card.likes.some(like => like._id === currentUser._id);
+      const updateLikes = hasLike ? api.removeLike.bind(api) : api.addLike.bind(api);
+      updateLikes(card._id)
+          .then(updateCards) 
+          .catch(e => console.log(e));
   }
   const handleCardDelete = (card) => {
     setConfirmPopupState({isOpen: true, cardId: card._id});
@@ -131,8 +131,7 @@ function App() {
   }
 
   React.useEffect(() => {
-    updateUserInfo()
-    .then(updateCards)
+    Promise.all([updateCards(), updateUserInfo()])
     .catch((e) => console.log(e));
   },[]);
 

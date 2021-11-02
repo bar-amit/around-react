@@ -22,7 +22,7 @@ function AddPlacePopup({ title, name: formName, buttonText, isOpen, onClose, onS
   const [link, setLink] = useState('');
 
   function handleChange(e) {
-    if(e.target.name ===' title')
+    if(e.target.name === 'title')
       setName(e.target.value);
     else
       setLink(e.target.value);
