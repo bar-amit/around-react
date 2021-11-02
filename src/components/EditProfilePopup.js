@@ -34,10 +34,10 @@ function EditProfilePopup({ title, name: formName, buttonText, isOpen, onClose, 
     return onSubmit({name, about});
   }
 
-  useEffect(()=>{
+  useEffect(() => {
     setAbout(currentAbout);
     setName(currentName);
-  },[currentName,currentAbout,isOpen]);
+  }, [currentName, currentAbout, isOpen]);
 
   return (
     <PopupWithForm title={title} name={formName} buttonText={buttonText} isOpen={isOpen} onClose={onClose} onSubmit={editProfileSubmit} >

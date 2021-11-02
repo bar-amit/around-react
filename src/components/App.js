@@ -60,43 +60,43 @@ function App() {
   * @param {{name: string, about: string}} param0
   * @returns Promise
   */
-  function onProfileSubmit({name,about}){
+  function onProfileSubmit({name,about}) {
     return api.updateUser({name,about})
     .then(updateUserInfo)
     .then(() => setIsEditProfilePopupOpen(false))
-    .catch(e=>console.log(e));
+    .catch((e) => console.log(e));
   }
 /**
  * Add a new card
  * @param {{name: string, link: string}} param0
  * @returns Promise
  */
-  function onPlaceSubmit({name, link}){
+  function onPlaceSubmit({name, link}) {
     return api.addCard({name, link})
     .then(updateCards)
     .then(() => setIsAddPlacePopupOpen(false))
-    .catch(e=>console.log(e));
+    .catch((e) => console.log(e));
   }
 /**
  * Set a new avatar
  * @param {string} link
  * @returns Promise
  */
-  function onAvatarSubmit(link){
+  function onAvatarSubmit(link) {
     return api.updateUserAvatar(link)
     .then(updateUserInfo)
     .then(() => setIsEditAvatarPopupOpen(false))
-    .catch(e=>console.log(e));
+    .catch((e) => console.log(e));
   }
 /**
  * Confirmation dialog to delete a card
  * @returns Promise
  */
-  function onConfirmSubmit(){
+  function onConfirmSubmit() {
     return api.deleteCard(confirmPopupState.cardId)
     .then(updateCards)
     .then(() => setConfirmPopupState({isOpen: false, cardId: ''}))
-    .catch(e=>console.log(e));
+    .catch((e) => console.log(e));
   }
 
   /*
@@ -104,12 +104,12 @@ function App() {
   */
   const onCardClick = (card) => setSelectedCard(card);
   const onCardLike = (card) => {
-      if(card.likes.some(like=>like._id===currentUser._id)) return api.removeLike(card._id)
+      if(card.likes.some((like) => like._id === currentUser._id)) return api.removeLike(card._id)
       .then(updateCards)
-      .catch(e=>console.log(e));
+      .catch((e) => console.log(e));
       return api.addLike(card._id)
       .then(updateCards)
-      .catch(e=>console.log(e));
+      .catch((e) => console.log(e));
   }
   const onCardDelete = (card) => {
     setConfirmPopupState({isOpen: true, cardId: card._id});
@@ -118,22 +118,22 @@ function App() {
   /*
     Api calls
   */
-  function updateCards(){
+  function updateCards() {
     return api.getCards()
     .then(data=> setCards(data))
-    .catch(e=>console.log(e));
+    .catch((e) => console.log(e));
   }
 
-  function updateUserInfo(){
+  function updateUserInfo() {
     return api.getUserInfo()
     .then(data => setCurrentUser(data))
-    .catch(e=>console.log(e));
+    .catch((e) => console.log(e));
   }
 
   React.useEffect(() => {
     updateUserInfo()
     .then(updateCards)
-    .catch(e=>console.log(e));
+    .catch((e) => console.log(e));
   },[]);
 
   return (

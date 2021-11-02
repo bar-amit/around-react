@@ -39,7 +39,9 @@ function Main({ onEditProfileClick, onAddPlaceClick, onEditAvatarClick, onCardCl
       </section>
       <section className="gallery">
         <ul className="gallery__container">
-          {cardsList.map(card => (<Card data={card} onCardClick={onCardClick} onCardLike={onCardLike} onCardDelete={onCardDelete} key={card._id} />))}
+          {cardsList.map((card) => (
+            <Card data={card} onCardClick={onCardClick} onCardLike={onCardLike} onCardDelete={onCardDelete} key={card._id} />
+          ))}
         </ul>
       </section>
     </main>

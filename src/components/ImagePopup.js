@@ -3,8 +3,7 @@
  * @param {{card: {_id: string, createdAt: string, likes: Array<string>, link: string, name: string, owner: {name: string, about: string, avatar: string, cohort: string, _id: string}, onClose: Function}}} props - Props object.
  * @returns {JSX.Element} Image Popup JSX component.
  */
-function ImagePopup(props) {
-  const {card, onClose} = props;
+function ImagePopup({card, onClose}) {
 
   const handleOverlayClose = (e) => {
     if(e.target.classList.contains('popup_visible'))
